@@ -1,14 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TrackList from './components/TrackList';
+import {configureStore} from './store';
+import * as actions from './actions';
+import {Provider} from 'react-redux';
 
-import 'jquery';
+const tracks = [
+  {
+    id: 1,
+    title: 'Em của ngày hôm qua'
+  },
+  {
+    id: 2,
+    title: 'Cơn mưa ngang qua'
+  }
+];
 
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-
+const store = configureStore();
+store.dispatch(actions.setTracks(tracks));
 
 ReactDOM.render(
-	<MyComponent />,
-	document.getElementById('root')
-)
-
+  <Provider store = {store}>
+    <TrackList />
+  </Provider>,
+  document.getElementById('app')
+);
